@@ -9,20 +9,29 @@ converted from the two's complement.
 - sending "power on" sequence with the gain saved before the "power off".
 - checking if the device is ready for the data retrieval.
 
+Example for the ESP8266:
+D_OUT pin is connected to the GPIO 5
+PD_SCK pin is connected to the GPIO 4
+Using internal HX711 oscillator, so ESP8266's frequency is set to 160000000
+ 
 ```
+>>> from machine import freq
+>>> freq(160000000)
+>>> 
 >>> from hx711 import HX711
-
+>>> 
 >>> driver = HX711(d_out=5, pd_sck=4)
->>> print(driver)
+>>> driver
 HX711 on channel A, gain=128
 >>> driver.read()
-77500
-
->>> driver.channel = HX711.CHANNEL_A_64
->>> print(driver)
-HX711 on channel A, gain=64
+74342
+>>> 
+>>> driver.channel=HX711.CHANNEL_A_64
 >>> driver.read()
-38750
-
+36328
+>>> 
+>>> driver.channel
+('A', 64)
+>>> 
 >>> driver.power_off()
 ```
