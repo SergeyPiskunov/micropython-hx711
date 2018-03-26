@@ -3,8 +3,8 @@ from utime import sleep_us
 
 
 class Scales(HX711):
-    def __init__(self, d_out, pd_sck, channel):
-        super(Scales, self).__init__(d_out, pd_sck, channel)
+    def __init__(self, d_out, pd_sck):
+        super(Scales, self).__init__(d_out, pd_sck)
         self.offset = 0
 
     def reset(self):
@@ -32,3 +32,9 @@ class Scales(HX711):
         return sorted(zip(values, weights), key=lambda x: x[1]).pop()[0]
 
 
+if __name__ == "__main__":
+    scales = Scales(d_out=5, pd_sck=4)
+    scales.tare()
+    val = scales.stable_value()
+    print(val)
+    scales.power_off()

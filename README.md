@@ -1,5 +1,5 @@
 # micropython-hx711
-Micropython driver for HX711 24-Bit Analog-to-Digital Converter
+Micropython driver for the HX711 24-Bit Analog-to-Digital Converter
 
 Latest version supports:
 - retrieving data from the channel 'A' with gain 128 and 64, 
