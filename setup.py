@@ -11,7 +11,7 @@ setup(
     cmdclass={'sdist': sdist_upip.sdist},
     name='micropython-hx711',
     py_modules=['hx711'],
-    version='1.0.0',
+    version='1.0.1',
     description='Micropython driver for the HX711',
     long_description='Micropython driver for the HX711 24-Bit Analog-to-Digital Converter',
     keywords=['micropython', 'hx711'],
