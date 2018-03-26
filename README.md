@@ -5,8 +5,8 @@ Latest version supports:
 - retrieving data from the channel 'A' with gain 128 and 64, 
 the channel 'B' with gain 32 in a raw form and a form 
 converted from the two's complement.
-- sending power off sequence to switch device in the power-saving mode.
-- sending power on sequence with the gain saved before the power_down.
+- sending "power off" sequence to switch device to the power-saving mode.
+- sending "power on" sequence with the gain saved before the "power off".
 - checking if the device is ready for the data retrieval.
 
 ```
