@@ -9,9 +9,9 @@ converted from the two's complement.
 - sending "power on" sequence with the gain saved before the "power off".
 - checking if the device is ready for the data retrieval.
 
-Example for the ESP8266:
-D_OUT pin is connected to the GPIO 5
-PD_SCK pin is connected to the GPIO 4
+#####Example for the ESP8266:
+D_OUT pin is connected to the GPIO 5<br/>
+PD_SCK pin is connected to the GPIO 4<br/>
 Using internal HX711 oscillator, so ESP8266's frequency is set to 160000000
  
 ```
