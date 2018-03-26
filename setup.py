@@ -8,7 +8,7 @@ import sdist_upip
 
 
 setup(
-    cmdclass={'sdist': sdist},
+    cmdclass={'sdist': sdist_upip.sdist},
     name='micropython-hx711',
     py_modules=['hx711'],
     version='1.0.0',

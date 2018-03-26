@@ -1,7 +1,6 @@
 from utime import sleep_us, time
-from machine import Pin, freq
+from machine import Pin
 from micropython import const
-
 
 
 class HX711Exception(Exception):
@@ -135,7 +134,6 @@ class HX711(object):
         if raw is True, the HX711 output will not be converted
         from two's complement format.
         """
-
         if not self.is_ready():
             self._wait()
 
@@ -150,5 +148,3 @@ class HX711(object):
             return raw_data
         else:
             return self._convert_from_twos_complement(raw_data)
-
-
