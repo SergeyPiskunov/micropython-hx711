@@ -24,6 +24,6 @@ setup(
     classifiers=[
         'Development Status :: 4 - Beta',
         'Programming Language :: Python :: Implementation :: MicroPython',
-        'License :: MIT License',
+        'License :: OSI Approved :: MIT License',
     ],
 )
