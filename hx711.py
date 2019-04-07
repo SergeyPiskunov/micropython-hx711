@@ -29,6 +29,8 @@ class HX711(object):
     MIN_VALUE = const(0x800000)
     READY_TIMEOUT_SEC = const(5)
     SLEEP_DELAY_USEC = const(80)
+    TARE = 0 
+    SCALE = 1 
 
     def __init__(self, d_out: int, pd_sck: int, channel: int = CHANNEL_A_128):
         self.d_out_pin = Pin(d_out, Pin.IN)
@@ -127,6 +129,27 @@ class HX711(object):
         """
         self.pd_sck_pin.value(0)
         self.channel = self._channel
+        
+    def set_scale(self, s)
+        """
+        Used to calibrate the sensor for a specific weigh scale.
+        """
+        SCALE = s
+        
+    def tare(self):
+        """
+        Measures the imput 10 times and sets a tare for the scale
+        """
+        sum = 0
+        for i in range(11):
+            sum += self.read()
+        TARE = sum // 10
+    
+    def read_w(self):
+        """
+        Return the value in the weigh scale and with tare applied
+        """
+        return (self.read() - TARE) * SCALE
 
     def read(self, raw=False):
         """
