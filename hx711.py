@@ -130,7 +130,7 @@ class HX711(object):
         self.pd_sck_pin.value(0)
         self.channel = self._channel
         
-    def set_scale(self, s)
+    def set_scale(self, s):
         """
         Used to calibrate the sensor for a specific weigh scale.
         """
