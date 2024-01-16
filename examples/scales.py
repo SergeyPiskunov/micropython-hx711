@@ -25,7 +25,7 @@ class Scales(HX711):
         return self._stabilizer(values)
 
     @staticmethod
-    def _stabilizer(values, deviation=10):
+    def _stabilizer(values, deviation=20):
         weights = []
         for prev in values:
             weights.append(sum([1 for current in values if abs(prev - current) / (prev / 100) <= deviation]))
@@ -33,8 +33,11 @@ class Scales(HX711):
 
 
 if __name__ == "__main__":
-    scales = Scales(d_out=5, pd_sck=4)
-    scales.tare()
-    val = scales.stable_value()
-    print(val)
-    scales.power_off()
+    scale = Scales(d_out=4, pd_sck=5)
+    scale.reset()
+    scale.tare()
+    while True:
+        if scale.is_ready():
+            val = scale.stable_value()
+            print(val)
+            sleep_us(500)
