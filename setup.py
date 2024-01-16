@@ -9,9 +9,9 @@ import sdist_upip
 
 setup(
     cmdclass={'sdist': sdist_upip.sdist},
-    name='micropython-hx711',
+    name='hx711_micropython_impementation_cassiorodrigo',
     py_modules=['hx711'],
-    version='1.0.1',
+    version='1.0.2',
     description='Micropython driver for the HX711',
     long_description='Micropython driver for the HX711 24-Bit Analog-to-Digital Converter',
     keywords=['micropython', 'hx711'],
