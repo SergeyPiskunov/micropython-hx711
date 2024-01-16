@@ -2,9 +2,9 @@ from hx711 import HX711
 from utime import sleep_us
 
 
-class Scales(HX711):
+class Scale(HX711):
     def __init__(self, d_out, pd_sck):
-        super(Scales, self).__init__(d_out, pd_sck)
+        super(Scale, self).__init__(d_out, pd_sck)
         self.offset = 0
 
     def reset(self):
@@ -33,7 +33,7 @@ class Scales(HX711):
 
 
 if __name__ == "__main__":
-    scale = Scales(d_out=4, pd_sck=5)
+    scale = Scale(d_out=4, pd_sck=5)
     scale.reset()
     scale.tare()
     while True:
