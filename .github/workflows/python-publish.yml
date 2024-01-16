@@ -35,6 +35,9 @@ jobs:
         curl -sSL https://pdm-project.org/install-pdm.py | python3 -
     - name: testing
       run: pytest .
+    - name: Custom step for checking
+      run: echo ls -al
+      
     - name: Build package
       run: pdm build
     - name: Publish package
