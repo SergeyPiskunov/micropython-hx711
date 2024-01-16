@@ -3,7 +3,7 @@ requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
 [project]
-name = "HX711 micropython impementation"
+name = "hx711-micropython-impementation"
 version = "0.0.1"
 description = "Based on SergeyPiskunov's implementation. More functionalities."
 authors = [{name = "Cassio Peluso", email="cassiorodrigo@cassiorodrigo.org"}]
