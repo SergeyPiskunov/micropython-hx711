@@ -4,7 +4,7 @@ build-backend = "pdm.backend"
 
 [project]
 name = "hx711-micropython-impementation"
-version = "0.0.1"
+version = "0.0.2"
 description = "Based on SergeyPiskunov's implementation. More functionalities."
 authors = [{name = "Cassio Peluso", email="cassiorodrigo@cassiorodrigo.org"}]
 requires-python = ">=3.8"
