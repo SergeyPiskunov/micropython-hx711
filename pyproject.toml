@@ -3,11 +3,10 @@ requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
 [project]
-name = "test project upload to pypi"
-version = "0.1.0"
-description = "A project built with PDM-Backend"
+name = "HX711 micropython impementation"
+version = "0.0.1"
+description = "Based on SergeyPiskunov's implementation. More functionalities."
 authors = [{name = "Cassio Peluso", email="cassiorodrigo@cassiorodrigo.org"}]
-dependencies = ['requests']
 requires-python = ">=3.8"
 readme = "README.md"
 license = {text = "MIT"}
