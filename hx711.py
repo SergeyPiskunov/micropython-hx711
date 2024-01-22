@@ -1,6 +1,8 @@
 from utime import sleep_us, time
-from machine import Pin
+from machine import Pin, freq
 from micropython import const
+
+freq(160_000_000)
 
 
 class HX711Exception(Exception):
@@ -34,6 +36,8 @@ class HX711(object):
         self.d_out_pin = Pin(d_out, Pin.IN)
         self.pd_sck_pin = Pin(pd_sck, Pin.OUT, value=0)
         self.channel = channel
+        self.scale_factor = 31347.75
+        self.offset = 16762519
 
     def __repr__(self):
         return "HX711 on channel %s, gain=%s" % self.channel
@@ -128,7 +132,7 @@ class HX711(object):
         self.pd_sck_pin.value(0)
         self.channel = self._channel
 
-    def read(self, raw=False):
+    def read(self, raw=True):
         """
         Read current value for current channel with current gain.
         if raw is True, the HX711 output will not be converted
@@ -148,3 +152,54 @@ class HX711(object):
             return raw_data
         else:
             return self._convert_from_twos_complement(raw_data)
+
+    def tare(self):
+        self.offset = self.read()
+        return self.offset
+
+    def calibrate(self, tare: bool = True):
+        cont = input("Tareing the scale... remove the weight and send an 'y': ")
+        if cont == "y" and tare:
+            self.tare()
+        known_mass = float(input(
+            f"Offset set to {self.offset}. Put the weight on the sacale and send the known mass through the input: "))
+        if known_mass == "":
+            known_mass = 535
+        self.scale_factor = self.read() / known_mass
+        print(f"Scale factor set to: {self.scale_factor}")
+        return self.scale_factor
+
+    def read_units(self):
+        p_reading = self.read() - self.offset
+        return p_reading / self.scale_factor
+
+
+def test_readings_deviation(number_of_readings_to_test: int = 30):
+    readings = []
+    hx = HX711(4, 5)
+    hx.calibrate()
+    while len(readings) < number_of_readings_to_test:
+        if hx.is_ready():
+            readings.append(hx.read_units())
+    sorted(readings)
+    print(readings)
+    print(f"Deviation of raw readings is: {readings[-1] - readings[0]}")
+    print(f"Deviation percentage: {((readings[-1] - readings[0]) / readings[0]) * 100}")
+
+
+def test_readings(number_of_readings_to_test: int = 30_000, calibrate: bool = False):
+    readings_counter = 0
+    hx = HX711(4, 5)
+    if calibrate:
+        hx.calibrate()
+    while readings_counter < number_of_readings_to_test:
+        if hx.is_ready():
+            reading = hx.read_units()
+            print(f"{reading:.2f}", end="\r")
+            readings_counter += 1
+            sleep_us(500)
+
+
+if __name__ == "__main__":
+    test_readings(calibrate=False)
+

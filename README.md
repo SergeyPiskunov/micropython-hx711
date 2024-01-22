@@ -1,4 +1,4 @@
-# micropython-hx711
+# hx711-mpython
 Micropython driver for the HX711 24-Bit Analog-to-Digital Converter
 
 Latest version supports:
@@ -10,27 +10,21 @@ converted from the two's complement.
 - checking if the device is ready for the data retrieval.
 
 #### Example for the ESP8266:
+Refer to the example folder. It can permorm tare and set a ratio to change the raw input.
 D_OUT pin is connected to the GPIO 5<br/>
 PD_SCK pin is connected to the GPIO 4<br/>
 Using internal HX711 oscillator, so ESP8266's frequency is set to 160000000
  
 ```
->>> from machine import freq
->>> freq(160000000)
->>> 
->>> from hx711 import HX711
->>> 
->>> driver = HX711(d_out=5, pd_sck=4)
->>> driver
-HX711 on channel A, gain=128
->>> driver.read()
-74342
->>> 
->>> driver.channel=HX711.CHANNEL_A_64
->>> driver.channel
-('A', 64)
->>> driver.read()
-36328
->>> 
->>> driver.power_off()
+from scales import Scales
+
+scale = Scales(d_out=4, pd_sck=5)
+scale.reset()
+scale.tare()
+while True:
+    if scale.is_ready():
+        val = scale.stable_value()
+        print(val)
+        sleep_us(500)
+
 ```
